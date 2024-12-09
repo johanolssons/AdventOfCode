@@ -11,7 +11,6 @@ import pandas as pd
 
 # Import Data
 df = pd.read_csv('C:/Python Projects/AdventOfCode/2024/Day2/input.txt', delimiter=" ",header=None)
-print(df.head())
 
 # Sample data
 dfSample = [
@@ -107,7 +106,5 @@ for index, row in df.iterrows():
         numSafeReports2 = numSafeReports2 + 1
     elif problem_damper(row):
         numSafeReports2 = numSafeReports2 + 1
-numSafeReports2
 
-#cleaned_list = list.dropna()
-#tempList = 
+numSafeReports2
