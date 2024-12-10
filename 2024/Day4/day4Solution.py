@@ -7,6 +7,7 @@
 ############################################################################################
 ########################################## Part 1 ##########################################
 ############################################################################################
+# TODO: Too many "XMAS" found, implement conktrol in results to confirm that the right word is found
 
 ######################################## Functions #########################################
 # List of all positions to check
@@ -28,7 +29,7 @@ def get_positions(wordList:list, letter:str):
            if char == letter]
 
 # Functions to check for "XMAS"
-def check_right(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_right(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "right" orientation.
@@ -44,16 +45,19 @@ def check_right(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
-
         if wordList[y][x+i] == word[i]:
             check = True
+            control = control + word[i]
+            res = res + wordList[y][x+i] #Control to spell word
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_left(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_left(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "left" orientation.
@@ -69,6 +73,8 @@ def check_left(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise.
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
         # TODO: Remove first if statement checking for negative indexing if relevant positions are checked.
         if x-i < 0:
@@ -76,12 +82,14 @@ def check_left(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
             break
         elif wordList[y][x-i] == word[i]:
             check = True
+            res = res + wordList[y][x-i] #Control to spell word
+            control = control + word[i] #Control to spell word
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_up(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "upward" orientation.
@@ -97,6 +105,8 @@ def check_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
         # TODO: Remove first if statement checking for negative indexing if relevant positions are checked.
         if y-i < 0:
@@ -104,12 +114,14 @@ def check_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
             break
         elif wordList[y-i][x] == word[i]:
             check = True
+            res = res + wordList[y-i][x] #Control to spell word
+            control = control + word[i]
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_down(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_down(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "downward" orientation.
@@ -125,16 +137,20 @@ def check_down(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
 
         if wordList[y+i][x] == word[i]:
             check = True
+            res = res + wordList[y+i][x] #Control to spell word
+            control = control + word[i]
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_right_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_right_up(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "right upward" orientation.
@@ -150,6 +166,8 @@ def check_right_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
          # TODO: Remove first if statement checking for negative indexing if relevant positions are checked.
         if y-i < 0:
@@ -157,12 +175,14 @@ def check_right_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
             break
         elif wordList[y-i][x+i] == word[i]:
             check = True
+            res = res + wordList[y-i][x+i] #Control to spell word
+            control = control + word[i]
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_right_down(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_right_down(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "right downward" orientation.
@@ -178,16 +198,20 @@ def check_right_down(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
 
         if wordList[y+i][x+i] == word[i]:
             check = True
+            res = res + wordList[y+i][x+i] #Control to spell word
+            control = control + word[i]
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_left_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_left_up(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "left upward" orientation.
@@ -203,6 +227,8 @@ def check_left_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
          # TODO: Remove first if statement checking for negative indexing if relevant positions are checked.
         if x-i < 0 or y-i < 0:
@@ -210,12 +236,14 @@ def check_left_up(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
             break
         elif wordList[y-i][x-i] == word[i]:
             check = True
+            res = res + wordList[y-i][x-i] #Control to spell word
+            control = control + word[i]
         else:
             check = False
             break
-    return check
+    return check, control, res
 
-def check_left_down(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
+def check_left_down(wordList:list, word: str, x:int = 0, y:int = 0):
     """
     Checks if a certain word exist in a on a specified position (x,y) in a specified
     list of text (wordList), assuming the word is written in "left downward" orientation.
@@ -231,14 +259,18 @@ def check_left_down(wordList:list, word: str, x:int = 0, y:int = 0) -> bool:
     Returns:
     boolean: True if word is found, False otherwise. 
     """
+    res = ""
+    control = ""
     for i in range(len(word)):
 
         if wordList[y+i][x-i] == word[i]:
             check = True
+            res = res + wordList[y+i][x-i]#Control to spell word
+            control = control + word[i]
         else:
             check = False
             break
-    return check
+    return check, control, res
 
 ########################################### Code ###########################################
 
@@ -258,7 +290,7 @@ linesSample = [line.strip() for line in linesSample] # Clean up any trailing new
 ## FIXME: Cacks past baundries through negative indexing.. 
 ### TODO: Change temporary solution where only negative indices are avoided in check funtions.
 word = "XMAS"
-wordList = lines
+wordList = linesSample
 count = 0
 result1 = []
 
@@ -268,65 +300,73 @@ pos = get_positions(wordList=wordList, letter="X")
 for x, y in pos:
     # Check to the right
     try:
-        if check_right(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_right(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"R"))
+            result1.append((x,y,"R", control, res))
     except IndexError:
         pass
     
     # Check to the left
     try:
-        if check_left(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_left(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"L"))
+            result1.append((x,y,"L", control, res))
     except IndexError:
         pass
 
     # Check upward
     try:
-        if check_up(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_up(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"U"))
+            result1.append((x,y,"U", control, res))
     except IndexError:
         pass
 
     # Check to the downward
     try:
-        if check_down(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_down(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"D"))
+            result1.append((x,y,"D", control, res))
     except IndexError:
         pass
 
     # Check to the right and up (diag)
     try:
-        if check_right_up(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_right_up(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"RU"))
+            result1.append((x,y,"RU", control, res))
     except IndexError:
         pass
 
     # Check to the right and down (diag)
     try:
-        if check_right_down(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_right_down(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"RD"))
+            result1.append((x,y,"RD", control, res))
     except IndexError:
         pass
 
     # Check to the left and up (diag)
     try:
-        if check_left_up(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_left_up(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"LU"))
+            result1.append((x,y,"LU", control, res))
     except IndexError:
         pass
 
     # Check to the left and down (diag)
     try:
-        if check_left_down(wordList=wordList, word=word, x=x, y=y):
+        check, control, res = check_left_down(wordList=wordList, word=word, x=x, y=y)
+        if check:
             count = count + 1
-            result1.append((x,y,"LD"))
+            result1.append((x,y,"LD", control, res))
     except IndexError:
         pass
 
