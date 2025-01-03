@@ -3,11 +3,19 @@
 ############################################################################################
 
 # Generic
+import matplotlib.pyplot as plt
+import numpy as np
 
 ############################################################################################
 ########################################## Part 1 ##########################################
 ############################################################################################
 # TODO: Too many "XMAS" found, implement conktrol in results to confirm that the right word is found
+
+"""
+I got thre more occurances of "XMAS" than chat GPT which had the correct ammoutnt (2534). I have tried
+to debug the code for too long now and might get back to it later. In the directory i have a file 
+"XMAS_coordinates.csv" which is GPTs coordinates of all starting "X"es where the upper left corner is (0,0)
+"""
 
 ######################################## Functions #########################################
 # List of all positions to check
@@ -304,7 +312,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"R", control, res))
-            check = False
     except IndexError:
         pass
     
@@ -314,7 +321,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"L", control, res))
-            check = False
     except IndexError:
         pass
 
@@ -324,7 +330,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"U", control, res))
-            check = False
     except IndexError:
         pass
 
@@ -334,7 +339,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"D", control, res))
-            check = False
     except IndexError:
         pass
 
@@ -344,7 +348,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"RU", control, res))
-            check = False
     except IndexError:
         pass
 
@@ -354,7 +357,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"RD", control, res))
-            check = False
     except IndexError:
         pass
 
@@ -364,7 +366,6 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"LU", control, res))
-            check = False
     except IndexError:
         pass
 
@@ -374,8 +375,51 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"LD", control, res))
-            check = False
     except IndexError:
         pass
 
 print(count)
+
+
+############################################################################################
+##################################### Plot the results #####################################
+############################################################################################
+
+"""
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Example grid
+grid = np.array([
+    ['M', 'M', 'M', 'X', 'M', 'A', 'S'],
+    ['X', 'M', 'A', 'S', 'M', 'X', 'M'],
+    ['A', 'M', 'X', 'M', 'A', 'M', 'M'],
+    ['S', 'M', 'X', 'M', 'A', 'S', 'M'],
+])
+
+# List of starting "X" coordinates (from your earlier task)
+coordinates = [(0, 3), (1, 0), (2, 2), (3, 2)]  # Replace with your actual coordinates
+
+# Create a visual representation
+plt.figure(figsize=(6, 6))
+ax = plt.gca()
+
+# Draw the grid
+for i in range(grid.shape[0]):
+    for j in range(grid.shape[1]):
+        color = 'red' if (i, j) in coordinates else 'black'
+        ax.text(j, i, grid[i, j], va='center', ha='center', fontsize=12, color=color)
+
+# Set grid lines
+ax.set_xticks(np.arange(-0.5, grid.shape[1], 1), minor=True)
+ax.set_yticks(np.arange(-0.5, grid.shape[0], 1), minor=True)
+ax.grid(which='minor', color='gray', linestyle='-', linewidth=1)
+
+# Turn off axes
+ax.set_xticks([])
+ax.set_yticks([])
+plt.show()
+"""
+############################################################################################
+########################################## Part 2 ##########################################
+############################################################################################
