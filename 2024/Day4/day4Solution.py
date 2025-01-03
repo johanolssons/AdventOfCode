@@ -280,7 +280,7 @@ with open("C:/Python Projects/AdventOfCode/2024/Day4/input.txt", 'r') as file:
 lines = [line.strip() for line in lines] # Clean up any trailing newlines
 
 # Sample text
-with open("C:/Python Projects/AdventOfCode/2024/Day4/sampleInput.txt", 'r') as file:
+with open("C:/Python Projects/AdventOfCode/2024/Day4/input.txt", 'r') as file:
     linesSample = file.readlines()
 linesSample = [line.strip() for line in linesSample] # Clean up any trailing newlines
 
@@ -304,6 +304,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"R", control, res))
+            check = False
     except IndexError:
         pass
     
@@ -313,6 +314,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"L", control, res))
+            check = False
     except IndexError:
         pass
 
@@ -322,6 +324,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"U", control, res))
+            check = False
     except IndexError:
         pass
 
@@ -331,6 +334,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"D", control, res))
+            check = False
     except IndexError:
         pass
 
@@ -340,6 +344,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"RU", control, res))
+            check = False
     except IndexError:
         pass
 
@@ -349,6 +354,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"RD", control, res))
+            check = False
     except IndexError:
         pass
 
@@ -358,6 +364,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"LU", control, res))
+            check = False
     except IndexError:
         pass
 
@@ -367,6 +374,7 @@ for x, y in pos:
         if check:
             count = count + 1
             result1.append((x,y,"LD", control, res))
+            check = False
     except IndexError:
         pass
 
